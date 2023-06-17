@@ -19,7 +19,8 @@ return {
 
   -- Set colorscheme to use
   colorscheme = "astrodark",
-
+  colorscheme = "gruvbox-material",
+  -- colorscheme = "PaperColor",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
