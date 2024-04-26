@@ -64,6 +64,7 @@ return {
           desc = "Pick to close",
         },
         ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New window" },
+        ["<Leader>lq"] = {"<cmd>LspStop<cr>", desc = "Turn off LSP on current buffer"},
         ["<Leader>tt"] = { "<cmd>ToggleTerm direction=tab<cr>", desc = "ToggleTerm in new window" },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus

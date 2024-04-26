@@ -2,6 +2,14 @@
 -- Configuration documentation can be found with `:h astroui`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
+local env_theme = os.getenv("TERM_THEME")
+
+local theme = ''
+if env_theme == '' or env_theme == 'GRUVBOX' then
+  theme = 'gruvbox-material'
+elseif env_theme == 'PAPERCOLOR' then
+  theme = 'onenord-light'
+end
 
 ---@type LazySpec
 return {
@@ -10,7 +18,9 @@ return {
   opts = {
     -- change colorscheme
     -- colorscheme = "astrodark",
-    colorscheme = "gruvbox-material",
+    -- colorscheme = "gruvbox-baby",
+    colorscheme = theme,
+    -- colorscheme = "gruvbox-material",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = { -- this table overrides highlights in all themes

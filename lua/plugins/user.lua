@@ -12,8 +12,10 @@ return {
     event = "BufRead",
     config = function() require("lsp_signature").setup() end,
   },
+  { "typicode/bg.nvim", lazy = false },
   "sainnhe/gruvbox-material",
-  "NLKNguyen/papercolor-theme",
+  "rmehri01/onenord.nvim",
+  "projekt0n/github-nvim-theme",
 
   -- == Examples of Overriding Plugins ==
 
