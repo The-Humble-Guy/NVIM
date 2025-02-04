@@ -4,7 +4,7 @@
 --       as this provides autocomplete and documentation while editing
 local env_theme = os.getenv("TERM_THEME")
 
-local theme = ''
+local theme = 'gruvbox-material'
 if env_theme == '' or env_theme == 'GRUVBOX' then
   theme = 'gruvbox-material'
 elseif env_theme == 'PAPERCOLOR' then

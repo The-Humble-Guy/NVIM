@@ -72,6 +72,18 @@ return {
         -- quick save
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
       },
+      -- keymaps to move block of text right down or up
+      v = {
+        ["<A-j>"] = { ":m '>+1<CR>gv=gv"},
+        ["<A-k>"] = { ":m '<-2<CR>gv=gv"},
+        ["p"] = { '"_dP'},
+      },
+      x = {
+        ["J"] = {":m '>+1<CR>gv=gv"},
+        ["K"] = {":m '<-2<CR>gv=gv"},
+        ["<A-j>"] = {":m '>+1<CR>gv=gv"},
+        ["<A-k>"] = {":m '<-2<CR>gv=gv"},
+      },
       t = {
         -- setting a mapping to false will disable it
         ["<esc>"] = { "<C-\\><C-n>" },
