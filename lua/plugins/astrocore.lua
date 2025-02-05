@@ -41,6 +41,10 @@ return {
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
       -- first key is the mode
+      i = {
+        -- better escape mapping in insert mode
+        ["jk"] = { "<esc>" },
+      },
       n = {
         -- second key is the lefthand side of the map
 
@@ -63,7 +67,7 @@ return {
           end,
           desc = "Pick to close",
         },
-        ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New window" },
+        ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
         ["<Leader>lq"] = {"<cmd>LspStop<cr>", desc = "Turn off LSP on current buffer"},
         ["<Leader>tt"] = { "<cmd>ToggleTerm direction=tab<cr>", desc = "ToggleTerm in new window" },
         -- tables with just a `desc` key will be registered with which-key if it's installed

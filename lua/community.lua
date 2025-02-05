@@ -8,5 +8,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.colorscheme.gruvbox-baby" },
   { import = "astrocommunity.colorscheme.vscode-nvim" },
+  { import = "astrocommunity.git.blame-nvim"},
+  { import = "astrocommunity.scrolling.neoscroll-nvim"},
   -- import/override with your plugins folder
 }
