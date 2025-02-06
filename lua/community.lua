@@ -10,5 +10,6 @@ return {
   { import = "astrocommunity.colorscheme.vscode-nvim" },
   { import = "astrocommunity.git.blame-nvim"},
   { import = "astrocommunity.scrolling.neoscroll-nvim"},
+  { import = "astrocommunity.motion.mini-move" },
   -- import/override with your plugins folder
 }

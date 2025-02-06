@@ -78,9 +78,6 @@ return {
       },
       -- keymaps to move block of text right down or up
       v = {
-        ["<A-j>"] = { ":m '>+1<CR>gv=gv"},
-        ["<A-k>"] = { ":m '<-2<CR>gv=gv"},
-        ["p"] = { '"_dP'},
         ["f"] = {function ()
         -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
           local get_visual_selection = function ()
@@ -99,12 +96,6 @@ return {
 
           require('telescope.builtin').live_grep({ default_text = text })
         end, desc = "Find selected text"}
-      },
-      x = {
-        ["J"] = {":m '>+1<CR>gv=gv"},
-        ["K"] = {":m '<-2<CR>gv=gv"},
-        ["<A-j>"] = {":m '>+1<CR>gv=gv"},
-        ["<A-k>"] = {":m '<-2<CR>gv=gv"},
       },
       t = {
         -- setting a mapping to false will disable it
