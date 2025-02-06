@@ -35,5 +35,12 @@ return {
         ["<Up>"] = function(bufnr) slow_scroll(bufnr, -1) end,
       }
     }
-  end
+
+    vim.api.nvim_create_autocmd({"User"}, {
+      pattern = "TelescopePreviewerLoaded",
+      callback = function ()
+        vim.wo.number = true
+      end
+    })
+  end,
 }
