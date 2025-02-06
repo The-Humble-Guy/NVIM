@@ -81,6 +81,24 @@ return {
         ["<A-j>"] = { ":m '>+1<CR>gv=gv"},
         ["<A-k>"] = { ":m '<-2<CR>gv=gv"},
         ["p"] = { '"_dP'},
+        ["f"] = {function ()
+        -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
+          local get_visual_selection = function ()
+            vim.cmd('noau normal! "vy"')
+            local text = vim.fn.getreg('v')
+            vim.fn.setreg('v', {})
+            text = string.gsub(text, "\n", "")
+            if #text > 0 then
+              return text
+            else
+              return ''
+            end
+          end
+
+          local text = get_visual_selection()
+
+          require('telescope.builtin').live_grep({ default_text = text })
+        end, desc = "Find selected text"}
       },
       x = {
         ["J"] = {":m '>+1<CR>gv=gv"},
