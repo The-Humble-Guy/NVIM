@@ -100,6 +100,7 @@ return {
       t = {
         -- setting a mapping to false will disable it
         ["<esc>"] = { "<C-\\><C-n>" },
+        ["<esc><esc>"] = { "<cmd>ToggleTermToggleAll<cr>" }
       },
     },
   },
