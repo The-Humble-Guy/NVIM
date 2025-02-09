@@ -78,7 +78,7 @@ return {
       },
       -- keymaps to move block of text right down or up
       v = {
-        ["f"] = {function ()
+        ["<Leader>f"] = {function ()
         -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
           local get_visual_selection = function ()
             vim.cmd('noau normal! "vy"')
