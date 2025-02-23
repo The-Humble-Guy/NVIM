@@ -51,7 +51,10 @@ return {
       require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
       -- add more custom luasnip configuration such as filetype extend or custom snippets
       local luasnip = require "luasnip"
+      luasnip.setup({enable_autosnippets = true})
       luasnip.filetype_extend("javascript", { "javascriptreact" })
+      luasnip.filetype_extend("tex", { "tex" })
+      require("luasnip.loaders.from_lua").load({paths = vim.fn.stdpath("config") .. "/lua/snippets"})
     end,
   },
 

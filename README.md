@@ -32,3 +32,6 @@ git clone https://github.com/The-Humble-Guy/NVIM.git ~/.config/nvim
 ```shell
 nvim
 ```
+
+Requirements:
+1. For Vimtex: Zathura (pdf viewer), texlive distro
