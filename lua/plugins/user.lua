@@ -1,6 +1,10 @@
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
 
+vim.api.nvim_create_user_command('DeleteTrailingWS', function()
+  vim.cmd('%s/\\s\\+$//e')
+end, {})
+
 ---@type LazySpec
 return {
 

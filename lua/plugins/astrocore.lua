@@ -3,6 +3,20 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local filemanager = require('toggleterm.terminal').Terminal
+local superfile = filemanager:new({cmd = "spf", hidden = true, direction = "float",
+  on_open = function(term)
+    if not term:is_open() then
+      term:toggle()
+    end
+    term:change_dir(vim.fn.getcwd())
+  end
+})
+
+function superfile_toggle()
+  superfile:toggle()
+end
+
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -70,6 +84,7 @@ return {
         ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
         ["<Leader>lq"] = {"<cmd>LspStop<cr>", desc = "Turn off LSP on current buffer"},
         ["<Leader>tt"] = { "<cmd>ToggleTerm direction=tab<cr>", desc = "ToggleTerm in new window" },
+        ["<Leader>ts"] = { function() superfile_toggle() end, desc = "Open Superfile filemanager" },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         ["<Leader>b"] = { desc = "Buffers" },
