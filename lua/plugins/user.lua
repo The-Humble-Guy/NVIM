@@ -6,6 +6,10 @@ vim.api.nvim_create_user_command('DeleteTrailingWS', function()
   vim.cmd('%s/\\s\\+$//e')
 end, {})
 
+vim.api.nvim_create_user_command('ReplaceSpacesByNewline', function ()
+  vim.cmd([[%s/\s/\r/g]])
+end, {})
+
 ---@type LazySpec
 return {
 
