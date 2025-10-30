@@ -119,7 +119,16 @@ return {
             live = true
           })
 
-        end, desc = "Find selected text"}
+        end, desc = "Find selected text"},
+        ["<A-j>"] = { ":m '>+1<CR>gv=gv"},
+        ["<A-k>"] = { ":m '<-2<CR>gv=gv"},
+        ["p"] = { '"_dP'},
+      },
+      x = {
+        ["J"] = {":m '>+1<CR>gv=gv"},
+        ["K"] = {":m '<-2<CR>gv=gv"},
+        ["<A-j>"] = {":m '>+1<CR>gv=gv"},
+        ["<A-k>"] = {":m '<-2<CR>gv=gv"},
       },
       t = {
         -- setting a mapping to false will disable it
