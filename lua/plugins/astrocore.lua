@@ -14,6 +14,42 @@ local superfile = filemanager:new {
   end,
 }
 
+-- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
+local get_visual_selection = function()
+  vim.cmd 'noau normal! "vy"'
+  local text = vim.fn.getreg "v"
+  vim.fn.setreg("v", {})
+  text = string.gsub(text, "\n", "")
+  if #text > 0 then
+    return text
+  else
+    return ""
+  end
+end
+
+local function search_lines_in_buffer(search)
+  require("snacks").picker.lines {
+    format = "lines",
+    pattern = search or "",
+    main = { current = false },
+    jump = { match = false },
+    layout = "default",
+    title = "Search inside buffer",
+    win = {
+      list = {
+        keys = {
+          ["<a-w>"] = { "cycle_win", mode = { "i", "n" } },
+        },
+      },
+      preview = {
+        keys = {
+          ["<a-w>"] = { "cycle_win", mode = { "i", "n" } },
+        },
+      },
+    },
+  }
+end
+
 function superfile_toggle() superfile:toggle() end
 
 ---@type LazySpec
@@ -88,6 +124,14 @@ return {
           end,
           desc = "Close buffer from tabline",
         },
+        ["<Leader>fb"] = {
+          function() search_lines_in_buffer() end,
+          desc = "Find in current buffer",
+        },
+        ["<Leader>fB"] = {
+          function() require("snacks").picker.grep_buffers { title = "Inside opened buffers" } end,
+          desc = "Find in opened buffers",
+        },
 
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
@@ -98,37 +142,58 @@ return {
       },
       -- keymaps to move block of text right down or up
       v = {
-        ["<Leader>f"] = {function ()
-        -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
-          local get_visual_selection = function ()
-            vim.cmd('noau normal! "vy"')
-            local text = vim.fn.getreg('v')
-            vim.fn.setreg('v', {})
-            text = string.gsub(text, "\n", "")
-            if #text > 0 then
-              return text
-            else
-              return ''
-            end
-          end
-
-          local text = get_visual_selection()
-
-          require("snacks").picker.grep({
-            search = text,
-            live = true
-          })
-
-        end, desc = "Find selected text"},
-        ["<A-j>"] = { ":m '>+1<CR>gv=gv"},
-        ["<A-k>"] = { ":m '<-2<CR>gv=gv"},
-        ["p"] = { '"_dP'},
+        ["<Leader>fb"] = {
+          function() search_lines_in_buffer(get_visual_selection()) end,
+          desc = "Find in current buffer",
+        },
+        ["<Leader>fB"] = {
+          function()
+            require("snacks").picker.grep_buffers { search = get_visual_selection(), title = "Inside opened buffers" }
+          end,
+          desc = "Find inside opened buffers",
+        },
+        ["<Leader>ff"] = {
+          function()
+            require("snacks").picker.files {
+              pattern = get_visual_selection(),
+              hidden = vim.tbl_get((vim.uv or vim.loop).fs_stat ".git" or {}, "type") == "directory",
+            }
+          end,
+          desc = "Find files",
+        },
+        ["<Leader>fg"] = {
+          function() require("snacks").picker.git_files { pattern = get_visual_selection() } end,
+          desc = "Find git files",
+        },
+        ["<Leader>fh"] = {
+          function() require("snacks").picker.help { pattern = get_visual_selection() } end,
+          desc = "Find help",
+        },
+        ["<Leader>fk"] = {
+          function() require("snacks").picker.keymaps { pattern = get_visual_selection() } end,
+          desc = "Find keymaps",
+        },
+        ["<Leader>fm"] = {
+          function() require("snacks").picker.man { pattern = get_visual_selection() } end,
+          desc = "Find man",
+        },
+        ["<Leader>fF"] = {
+          function() require("snacks").picker.files { pattern = get_visual_selection(), hidden = true, ignored = true } end,
+          desc = "Find all files",
+        },
+        ["<Leader>fw"] = {
+          function() require("snacks").picker.grep { search = get_visual_selection(), live = true } end,
+          desc = "Find selected text (words)",
+        },
+        ["<A-j>"] = { ":m '>+1<CR>gv=gv" },
+        ["<A-k>"] = { ":m '<-2<CR>gv=gv" },
+        ["p"] = { '"_dP' },
       },
       x = {
-        ["J"] = {":m '>+1<CR>gv=gv"},
-        ["K"] = {":m '<-2<CR>gv=gv"},
-        ["<A-j>"] = {":m '>+1<CR>gv=gv"},
-        ["<A-k>"] = {":m '<-2<CR>gv=gv"},
+        ["J"] = { ":m '>+1<CR>gv=gv" },
+        ["K"] = { ":m '<-2<CR>gv=gv" },
+        ["<A-j>"] = { ":m '>+1<CR>gv=gv" },
+        ["<A-k>"] = { ":m '<-2<CR>gv=gv" },
       },
       t = {
         -- setting a mapping to false will disable it
