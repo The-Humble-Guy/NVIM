@@ -97,26 +97,30 @@ return {
         -- ["<C-S>"] = false,
       },
       -- keymaps to move block of text right down or up
-      -- v = {
-      --   ["<Leader>f"] = {function ()
-      --   -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
-      --     local get_visual_selection = function ()
-      --       vim.cmd('noau normal! "vy"')
-      --       local text = vim.fn.getreg('v')
-      --       vim.fn.setreg('v', {})
-      --       text = string.gsub(text, "\n", "")
-      --       if #text > 0 then
-      --         return text
-      --       else
-      --         return ''
-      --       end
-      --     end
-      --
-      --     local text = get_visual_selection()
-      --
-      --     require('telescope.builtin').live_grep({ default_text = text })
-      --   end, desc = "Find selected text"}
-      -- },
+      v = {
+        ["<Leader>f"] = {function ()
+        -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
+          local get_visual_selection = function ()
+            vim.cmd('noau normal! "vy"')
+            local text = vim.fn.getreg('v')
+            vim.fn.setreg('v', {})
+            text = string.gsub(text, "\n", "")
+            if #text > 0 then
+              return text
+            else
+              return ''
+            end
+          end
+
+          local text = get_visual_selection()
+
+          require("snacks").picker.grep({
+            search = text,
+            live = true
+          })
+
+        end, desc = "Find selected text"}
+      },
       t = {
         -- setting a mapping to false will disable it
         ["<esc>"] = { "<C-\\><C-n>" },
