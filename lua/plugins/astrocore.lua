@@ -14,6 +14,8 @@ local superfile = filemanager:new {
   end,
 }
 
+function superfile_toggle() superfile:toggle() end
+
 -- NOTE: This function from this issue: https://github.com/nvim-telescope/telescope.nvim/issues/1923
 local get_visual_selection = function()
   vim.cmd 'noau normal! "vy"'
@@ -49,8 +51,6 @@ local function search_lines_in_buffer(search)
     },
   }
 end
-
-function superfile_toggle() superfile:toggle() end
 
 ---@type LazySpec
 return {
@@ -140,7 +140,6 @@ return {
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
       },
-      -- keymaps to move block of text right down or up
       v = {
         ["<Leader>fb"] = {
           function() search_lines_in_buffer(get_visual_selection()) end,
